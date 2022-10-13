@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+DuplicateFileFinder/bin/Release/DuplicateFileFinder.exe.manifest
+DuplicateFileFinder/bin/Release/DuplicateFileFinder.application
+DuplicateFileFinder/bin/Release/app.publish/DuplicateFileFinder.exe
