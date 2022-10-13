@@ -1,4 +1,6 @@
-﻿namespace DuplicateFileFinder
+﻿using System.Windows.Forms;
+
+namespace DuplicateFileFinder
 {
 	partial class Form1
 	{
@@ -66,18 +68,18 @@
 			// lblTopmostDir
 			// 
 			this.lblTopmostDir.AutoSize = true;
-			this.lblTopmostDir.Location = new System.Drawing.Point(12, 16);
+			this.lblTopmostDir.Location = new System.Drawing.Point(10, 13);
 			this.lblTopmostDir.Name = "lblTopmostDir";
-			this.lblTopmostDir.Size = new System.Drawing.Size(142, 15);
+			this.lblTopmostDir.Size = new System.Drawing.Size(130, 13);
 			this.lblTopmostDir.TabIndex = 1;
 			this.lblTopmostDir.Text = "Topmost Search Directory";
 			// 
 			// btnBrowse_TopmostDir
 			// 
 			this.btnBrowse_TopmostDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnBrowse_TopmostDir.Location = new System.Drawing.Point(403, 12);
+			this.btnBrowse_TopmostDir.Location = new System.Drawing.Point(424, 7);
 			this.btnBrowse_TopmostDir.Name = "btnBrowse_TopmostDir";
-			this.btnBrowse_TopmostDir.Size = new System.Drawing.Size(75, 23);
+			this.btnBrowse_TopmostDir.Size = new System.Drawing.Size(64, 23);
 			this.btnBrowse_TopmostDir.TabIndex = 2;
 			this.btnBrowse_TopmostDir.Text = "Browse";
 			this.btnBrowse_TopmostDir.UseVisualStyleBackColor = true;
@@ -86,9 +88,9 @@
 			// btnAllImages
 			// 
 			this.btnAllImages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnAllImages.Location = new System.Drawing.Point(554, 42);
+			this.btnAllImages.Location = new System.Drawing.Point(565, 34);
 			this.btnAllImages.Name = "btnAllImages";
-			this.btnAllImages.Size = new System.Drawing.Size(75, 23);
+			this.btnAllImages.Size = new System.Drawing.Size(64, 23);
 			this.btnAllImages.TabIndex = 3;
 			this.btnAllImages.Text = "All Images";
 			this.btnAllImages.UseVisualStyleBackColor = true;
@@ -97,9 +99,9 @@
 			// lblFileExtensions
 			// 
 			this.lblFileExtensions.AutoSize = true;
-			this.lblFileExtensions.Location = new System.Drawing.Point(12, 45);
+			this.lblFileExtensions.Location = new System.Drawing.Point(10, 39);
 			this.lblFileExtensions.Name = "lblFileExtensions";
-			this.lblFileExtensions.Size = new System.Drawing.Size(190, 15);
+			this.lblFileExtensions.Size = new System.Drawing.Size(170, 13);
 			this.lblFileExtensions.TabIndex = 4;
 			this.lblFileExtensions.Text = "File Extensions (comma separated)";
 			this.toolTip1.SetToolTip(this.lblFileExtensions, "Not case sensitive.  Do not need to include a decimal place");
@@ -108,10 +110,10 @@
 			// 
 			this.tbTopmostDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbTopmostDir.Location = new System.Drawing.Point(160, 13);
+			this.tbTopmostDir.Location = new System.Drawing.Point(146, 10);
 			this.tbTopmostDir.Name = "tbTopmostDir";
 			this.tbTopmostDir.ReadOnly = true;
-			this.tbTopmostDir.Size = new System.Drawing.Size(237, 23);
+			this.tbTopmostDir.Size = new System.Drawing.Size(272, 20);
 			this.tbTopmostDir.TabIndex = 0;
 			this.tbTopmostDir.Text = ".\\..\\..\\..\\..\\..\\source";
 			// 
@@ -119,19 +121,19 @@
 			// 
 			this.tbFileExtensions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbFileExtensions.Location = new System.Drawing.Point(208, 42);
+			this.tbFileExtensions.Location = new System.Drawing.Point(186, 36);
 			this.tbFileExtensions.Name = "tbFileExtensions";
-			this.tbFileExtensions.Size = new System.Drawing.Size(340, 23);
+			this.tbFileExtensions.Size = new System.Drawing.Size(373, 20);
 			this.tbFileExtensions.TabIndex = 5;
 			this.tbFileExtensions.Text = "jpg, png, bmp, tiff";
 			this.toolTip1.SetToolTip(this.tbFileExtensions, "Not case sensitive.  Do not need to include a decimal place");
 			// 
 			// button1
 			// 
-			this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.button1.Location = new System.Drawing.Point(8, 100);
+			this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+			this.button1.Location = new System.Drawing.Point(10, 88);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(89, 23);
+			this.button1.Size = new System.Drawing.Size(88, 23);
 			this.button1.TabIndex = 6;
 			this.button1.Text = "Find all files";
 			this.button1.UseVisualStyleBackColor = true;
@@ -156,17 +158,17 @@
 			this.dgvFoundFiles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
 			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
 			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
 			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
 			this.dgvFoundFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			this.dgvFoundFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvFoundFiles.Location = new System.Drawing.Point(3, 208);
+			this.dgvFoundFiles.Location = new System.Drawing.Point(3, 180);
 			this.dgvFoundFiles.Name = "dgvFoundFiles";
 			this.dgvFoundFiles.RowTemplate.Height = 25;
-			this.dgvFoundFiles.Size = new System.Drawing.Size(626, 283);
+			this.dgvFoundFiles.Size = new System.Drawing.Size(627, 306);
 			this.dgvFoundFiles.TabIndex = 8;
 			this.dgvFoundFiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFoundFiles_CellContentClick);
 			this.dgvFoundFiles.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvFoundFiles_ColumnAdded);
@@ -176,15 +178,15 @@
 			this.imageContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.imageContainer.Location = new System.Drawing.Point(0, 0);
 			this.imageContainer.Name = "imageContainer";
-			this.imageContainer.Size = new System.Drawing.Size(551, 494);
+			this.imageContainer.Size = new System.Drawing.Size(480, 489);
 			this.imageContainer.TabIndex = 10;
 			// 
 			// btnClearFoundFiles
 			// 
 			this.btnClearFoundFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnClearFoundFiles.Location = new System.Drawing.Point(546, 179);
+			this.btnClearFoundFiles.Location = new System.Drawing.Point(558, 151);
 			this.btnClearFoundFiles.Name = "btnClearFoundFiles";
-			this.btnClearFoundFiles.Size = new System.Drawing.Size(83, 23);
+			this.btnClearFoundFiles.Size = new System.Drawing.Size(71, 23);
 			this.btnClearFoundFiles.TabIndex = 11;
 			this.btnClearFoundFiles.Text = "Clear List";
 			this.btnClearFoundFiles.UseVisualStyleBackColor = true;
@@ -193,9 +195,9 @@
 			// btnCopyUnique
 			// 
 			this.btnCopyUnique.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCopyUnique.Location = new System.Drawing.Point(208, 178);
+			this.btnCopyUnique.Location = new System.Drawing.Point(186, 150);
 			this.btnCopyUnique.Name = "btnCopyUnique";
-			this.btnCopyUnique.Size = new System.Drawing.Size(133, 23);
+			this.btnCopyUnique.Size = new System.Drawing.Size(114, 23);
 			this.btnCopyUnique.TabIndex = 12;
 			this.btnCopyUnique.Text = "Copy Only Unique";
 			this.btnCopyUnique.UseVisualStyleBackColor = true;
@@ -204,9 +206,9 @@
 			// btnBrowse_DestDir
 			// 
 			this.btnBrowse_DestDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnBrowse_DestDir.Location = new System.Drawing.Point(554, 71);
+			this.btnBrowse_DestDir.Location = new System.Drawing.Point(565, 62);
 			this.btnBrowse_DestDir.Name = "btnBrowse_DestDir";
-			this.btnBrowse_DestDir.Size = new System.Drawing.Size(75, 23);
+			this.btnBrowse_DestDir.Size = new System.Drawing.Size(64, 23);
 			this.btnBrowse_DestDir.TabIndex = 15;
 			this.btnBrowse_DestDir.Text = "Browse";
 			this.btnBrowse_DestDir.UseVisualStyleBackColor = true;
@@ -215,9 +217,9 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 74);
+			this.label1.Location = new System.Drawing.Point(10, 64);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(103, 15);
+			this.label1.Size = new System.Drawing.Size(92, 13);
 			this.label1.TabIndex = 14;
 			this.label1.Text = "Copy-To Directory";
 			// 
@@ -225,48 +227,48 @@
 			// 
 			this.tbDestinationDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbDestinationDir.Location = new System.Drawing.Point(121, 71);
+			this.tbDestinationDir.Location = new System.Drawing.Point(106, 62);
 			this.tbDestinationDir.Name = "tbDestinationDir";
 			this.tbDestinationDir.ReadOnly = true;
-			this.tbDestinationDir.Size = new System.Drawing.Size(427, 23);
+			this.tbDestinationDir.Size = new System.Drawing.Size(453, 20);
 			this.tbDestinationDir.TabIndex = 13;
 			this.tbDestinationDir.Text = ".\\..\\..\\..\\..\\..\\dest";
 			// 
 			// lblTotalFilesFound
 			// 
 			this.lblTotalFilesFound.AutoSize = true;
-			this.lblTotalFilesFound.Location = new System.Drawing.Point(12, 153);
+			this.lblTotalFilesFound.Location = new System.Drawing.Point(10, 126);
 			this.lblTotalFilesFound.Name = "lblTotalFilesFound";
-			this.lblTotalFilesFound.Size = new System.Drawing.Size(95, 15);
+			this.lblTotalFilesFound.Size = new System.Drawing.Size(88, 13);
 			this.lblTotalFilesFound.TabIndex = 17;
 			this.lblTotalFilesFound.Text = "Total Files Found";
 			// 
 			// tbTotalFilesFound
 			// 
-			this.tbTotalFilesFound.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.tbTotalFilesFound.Location = new System.Drawing.Point(126, 150);
+			this.tbTotalFilesFound.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+			this.tbTotalFilesFound.Location = new System.Drawing.Point(114, 122);
 			this.tbTotalFilesFound.Name = "tbTotalFilesFound";
 			this.tbTotalFilesFound.ReadOnly = true;
-			this.tbTotalFilesFound.Size = new System.Drawing.Size(76, 23);
+			this.tbTotalFilesFound.Size = new System.Drawing.Size(66, 23);
 			this.tbTotalFilesFound.TabIndex = 16;
 			this.tbTotalFilesFound.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
 			// lblUniqueFilesFound
 			// 
 			this.lblUniqueFilesFound.AutoSize = true;
-			this.lblUniqueFilesFound.Location = new System.Drawing.Point(12, 182);
+			this.lblUniqueFilesFound.Location = new System.Drawing.Point(10, 156);
 			this.lblUniqueFilesFound.Name = "lblUniqueFilesFound";
-			this.lblUniqueFilesFound.Size = new System.Drawing.Size(108, 15);
+			this.lblUniqueFilesFound.Size = new System.Drawing.Size(98, 13);
 			this.lblUniqueFilesFound.TabIndex = 18;
 			this.lblUniqueFilesFound.Text = "Unique Files Found";
 			// 
 			// tbUniqueFilesFound
 			// 
-			this.tbUniqueFilesFound.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-			this.tbUniqueFilesFound.Location = new System.Drawing.Point(126, 179);
+			this.tbUniqueFilesFound.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+			this.tbUniqueFilesFound.Location = new System.Drawing.Point(114, 151);
 			this.tbUniqueFilesFound.Name = "tbUniqueFilesFound";
 			this.tbUniqueFilesFound.ReadOnly = true;
-			this.tbUniqueFilesFound.Size = new System.Drawing.Size(76, 23);
+			this.tbUniqueFilesFound.Size = new System.Drawing.Size(66, 23);
 			this.tbUniqueFilesFound.TabIndex = 19;
 			this.tbUniqueFilesFound.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
@@ -276,9 +278,9 @@
 			this.cbSearchSubDirs.AutoSize = true;
 			this.cbSearchSubDirs.Checked = true;
 			this.cbSearchSubDirs.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbSearchSubDirs.Location = new System.Drawing.Point(484, 15);
+			this.cbSearchSubDirs.Location = new System.Drawing.Point(494, 10);
 			this.cbSearchSubDirs.Name = "cbSearchSubDirs";
-			this.cbSearchSubDirs.Size = new System.Drawing.Size(145, 19);
+			this.cbSearchSubDirs.Size = new System.Drawing.Size(135, 17);
 			this.cbSearchSubDirs.TabIndex = 20;
 			this.cbSearchSubDirs.Text = "Search Sub-Directories";
 			this.cbSearchSubDirs.UseVisualStyleBackColor = true;
@@ -316,16 +318,17 @@
 			// splitContainer.Panel2
 			// 
 			this.splitContainer.Panel2.Controls.Add(this.imageContainer);
-			this.splitContainer.Size = new System.Drawing.Size(1195, 498);
+			this.splitContainer.Size = new System.Drawing.Size(1123, 493);
 			this.splitContainer.SplitterDistance = 636;
+			this.splitContainer.SplitterWidth = 3;
 			this.splitContainer.TabIndex = 21;
 			// 
 			// btnCopyAll
 			// 
 			this.btnCopyAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCopyAll.Location = new System.Drawing.Point(347, 178);
+			this.btnCopyAll.Location = new System.Drawing.Point(306, 150);
 			this.btnCopyAll.Name = "btnCopyAll";
-			this.btnCopyAll.Size = new System.Drawing.Size(89, 23);
+			this.btnCopyAll.Size = new System.Drawing.Size(76, 23);
 			this.btnCopyAll.TabIndex = 21;
 			this.btnCopyAll.Text = "Copy All";
 			this.btnCopyAll.UseVisualStyleBackColor = true;
@@ -333,9 +336,9 @@
 			// 
 			// Form1
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1195, 498);
+			this.ClientSize = new System.Drawing.Size(1123, 493);
 			this.Controls.Add(this.splitContainer);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "Form1";
@@ -378,3 +381,4 @@
 		private Button btnCopyAll;
 	}
 }
+

@@ -1,6 +1,12 @@
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading;
-using System.Diagnostics;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
 
 namespace DuplicateFileFinder
 {
@@ -109,7 +115,7 @@ namespace DuplicateFileFinder
 					}
 				}
 			}
-			
+
 			//first build a dictionary of all found files, then add them to foundFiles
 			foreach (var kvp in duplicateDict)
 			{
@@ -143,7 +149,7 @@ namespace DuplicateFileFinder
 			{
 				//View just this picture
 				AddImagesToView(new List<string> { (string)dgvFoundFiles.Rows[e.RowIndex].Cells["path"].Value });
-				
+
 			}
 			else if (columnName == "viewDuplicates")
 			{
@@ -170,7 +176,7 @@ namespace DuplicateFileFinder
 			}
 		}
 
-		private void NewPV_DeleteRequested(object? sender, EventArgs e)
+		private void NewPV_DeleteRequested(object sender, EventArgs e)
 		{
 			DeleteImage(((PictureViewer)sender));
 		}
@@ -241,7 +247,7 @@ namespace DuplicateFileFinder
 				e.Column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 			}
 
-			if (new string[] {"duplicate", "count", "viewSingle", "viewDuplicates"}.Contains(e.Column.Name))
+			if (new string[] { "duplicate", "count", "viewSingle", "viewDuplicates" }.Contains(e.Column.Name))
 			{
 				e.Column.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 			}

@@ -1,4 +1,6 @@
-﻿namespace DuplicateFileFinder
+﻿using System.Windows.Forms;
+
+namespace DuplicateFileFinder
 {
 	partial class PictureViewer
 	{
@@ -41,9 +43,9 @@
 			// 
 			// pictureBox
 			// 
-			this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBox.Location = new System.Drawing.Point(3, 61);
 			this.pictureBox.Name = "pictureBox";
 			this.pictureBox.Size = new System.Drawing.Size(626, 399);
@@ -53,8 +55,8 @@
 			// 
 			// tbPath
 			// 
-			this.tbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.tbPath.Location = new System.Drawing.Point(49, 3);
 			this.tbPath.Name = "tbPath";
 			this.tbPath.ReadOnly = true;
@@ -83,8 +85,8 @@
 			// 
 			// tbName
 			// 
-			this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.tbName.Location = new System.Drawing.Point(49, 32);
 			this.tbName.Name = "tbName";
 			this.tbName.ReadOnly = true;
