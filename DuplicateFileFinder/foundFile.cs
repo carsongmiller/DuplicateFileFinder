@@ -15,5 +15,7 @@ namespace DuplicateFileFinder
 
 		[DisplayName("Count")]
 		public int count { get; set; } = 0;
+
+		public string hash;
 	}
 }

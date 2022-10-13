@@ -34,23 +34,25 @@ namespace DuplicateFileFinder
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-			this.lblTopmostDir = new System.Windows.Forms.Label();
+			this.lblSourceDir = new System.Windows.Forms.Label();
 			this.btnBrowse_TopmostDir = new System.Windows.Forms.Button();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.btnAllImages = new System.Windows.Forms.Button();
 			this.lblFileExtensions = new System.Windows.Forms.Label();
-			this.tbTopmostDir = new System.Windows.Forms.TextBox();
+			this.tbSourceDir = new System.Windows.Forms.TextBox();
 			this.tbFileExtensions = new System.Windows.Forms.TextBox();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.button1 = new System.Windows.Forms.Button();
+			this.radCompareContents = new System.Windows.Forms.RadioButton();
+			this.radCompareFilenames = new System.Windows.Forms.RadioButton();
+			this.btnFindFiles = new System.Windows.Forms.Button();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.dgvFoundFiles = new System.Windows.Forms.DataGridView();
 			this.imageContainer = new System.Windows.Forms.FlowLayoutPanel();
 			this.btnClearFoundFiles = new System.Windows.Forms.Button();
 			this.btnCopyUnique = new System.Windows.Forms.Button();
 			this.btnBrowse_DestDir = new System.Windows.Forms.Button();
-			this.label1 = new System.Windows.Forms.Label();
-			this.tbDestinationDir = new System.Windows.Forms.TextBox();
+			this.lblDestDir = new System.Windows.Forms.Label();
+			this.tbDestDir = new System.Windows.Forms.TextBox();
 			this.lblTotalFilesFound = new System.Windows.Forms.Label();
 			this.tbTotalFilesFound = new System.Windows.Forms.TextBox();
 			this.lblUniqueFilesFound = new System.Windows.Forms.Label();
@@ -65,14 +67,14 @@ namespace DuplicateFileFinder
 			this.splitContainer.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// lblTopmostDir
+			// lblSourceDir
 			// 
-			this.lblTopmostDir.AutoSize = true;
-			this.lblTopmostDir.Location = new System.Drawing.Point(10, 13);
-			this.lblTopmostDir.Name = "lblTopmostDir";
-			this.lblTopmostDir.Size = new System.Drawing.Size(130, 13);
-			this.lblTopmostDir.TabIndex = 1;
-			this.lblTopmostDir.Text = "Topmost Search Directory";
+			this.lblSourceDir.AutoSize = true;
+			this.lblSourceDir.Location = new System.Drawing.Point(10, 13);
+			this.lblSourceDir.Name = "lblSourceDir";
+			this.lblSourceDir.Size = new System.Drawing.Size(86, 13);
+			this.lblSourceDir.TabIndex = 1;
+			this.lblSourceDir.Text = "Source Directory";
 			// 
 			// btnBrowse_TopmostDir
 			// 
@@ -106,16 +108,16 @@ namespace DuplicateFileFinder
 			this.lblFileExtensions.Text = "File Extensions (comma separated)";
 			this.toolTip1.SetToolTip(this.lblFileExtensions, "Not case sensitive.  Do not need to include a decimal place");
 			// 
-			// tbTopmostDir
+			// tbSourceDir
 			// 
-			this.tbTopmostDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.tbSourceDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbTopmostDir.Location = new System.Drawing.Point(146, 10);
-			this.tbTopmostDir.Name = "tbTopmostDir";
-			this.tbTopmostDir.ReadOnly = true;
-			this.tbTopmostDir.Size = new System.Drawing.Size(272, 20);
-			this.tbTopmostDir.TabIndex = 0;
-			this.tbTopmostDir.Text = ".\\..\\..\\..\\..\\..\\source";
+			this.tbSourceDir.Location = new System.Drawing.Point(102, 10);
+			this.tbSourceDir.Name = "tbSourceDir";
+			this.tbSourceDir.ReadOnly = true;
+			this.tbSourceDir.Size = new System.Drawing.Size(316, 20);
+			this.tbSourceDir.TabIndex = 0;
+			this.tbSourceDir.Text = ".\\..\\..\\..\\..\\source";
 			// 
 			// tbFileExtensions
 			// 
@@ -128,16 +130,40 @@ namespace DuplicateFileFinder
 			this.tbFileExtensions.Text = "jpg, png, bmp, tiff";
 			this.toolTip1.SetToolTip(this.tbFileExtensions, "Not case sensitive.  Do not need to include a decimal place");
 			// 
-			// button1
+			// radCompareContents
 			// 
-			this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.button1.Location = new System.Drawing.Point(10, 88);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(88, 23);
-			this.button1.TabIndex = 6;
-			this.button1.Text = "Find all files";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.radCompareContents.AutoSize = true;
+			this.radCompareContents.Location = new System.Drawing.Point(227, 91);
+			this.radCompareContents.Name = "radCompareContents";
+			this.radCompareContents.Size = new System.Drawing.Size(131, 17);
+			this.radCompareContents.TabIndex = 23;
+			this.radCompareContents.Text = "Compare File Contents";
+			this.toolTip1.SetToolTip(this.radCompareContents, "Slow and Smart");
+			this.radCompareContents.UseVisualStyleBackColor = true;
+			// 
+			// radCompareFilenames
+			// 
+			this.radCompareFilenames.AutoSize = true;
+			this.radCompareFilenames.Checked = true;
+			this.radCompareFilenames.Location = new System.Drawing.Point(104, 91);
+			this.radCompareFilenames.Name = "radCompareFilenames";
+			this.radCompareFilenames.Size = new System.Drawing.Size(117, 17);
+			this.radCompareFilenames.TabIndex = 22;
+			this.radCompareFilenames.TabStop = true;
+			this.radCompareFilenames.Text = "Compare Filenames";
+			this.toolTip1.SetToolTip(this.radCompareFilenames, "Fast and Dumb");
+			this.radCompareFilenames.UseVisualStyleBackColor = true;
+			// 
+			// btnFindFiles
+			// 
+			this.btnFindFiles.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+			this.btnFindFiles.Location = new System.Drawing.Point(10, 88);
+			this.btnFindFiles.Name = "btnFindFiles";
+			this.btnFindFiles.Size = new System.Drawing.Size(88, 23);
+			this.btnFindFiles.TabIndex = 6;
+			this.btnFindFiles.Text = "Find all files";
+			this.btnFindFiles.UseVisualStyleBackColor = true;
+			this.btnFindFiles.Click += new System.EventHandler(this.btnFindFiles_Click);
 			// 
 			// contextMenuStrip1
 			// 
@@ -188,7 +214,7 @@ namespace DuplicateFileFinder
 			this.btnClearFoundFiles.Name = "btnClearFoundFiles";
 			this.btnClearFoundFiles.Size = new System.Drawing.Size(71, 23);
 			this.btnClearFoundFiles.TabIndex = 11;
-			this.btnClearFoundFiles.Text = "Clear List";
+			this.btnClearFoundFiles.Text = "Clear";
 			this.btnClearFoundFiles.UseVisualStyleBackColor = true;
 			this.btnClearFoundFiles.Click += new System.EventHandler(this.btnClearFoundFiles_Click);
 			// 
@@ -214,25 +240,25 @@ namespace DuplicateFileFinder
 			this.btnBrowse_DestDir.UseVisualStyleBackColor = true;
 			this.btnBrowse_DestDir.Click += new System.EventHandler(this.btnBrowse_DestDir_Click);
 			// 
-			// label1
+			// lblDestDir
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(10, 64);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(92, 13);
-			this.label1.TabIndex = 14;
-			this.label1.Text = "Copy-To Directory";
+			this.lblDestDir.AutoSize = true;
+			this.lblDestDir.Location = new System.Drawing.Point(10, 64);
+			this.lblDestDir.Name = "lblDestDir";
+			this.lblDestDir.Size = new System.Drawing.Size(105, 13);
+			this.lblDestDir.TabIndex = 14;
+			this.lblDestDir.Text = "Destination Directory";
 			// 
-			// tbDestinationDir
+			// tbDestDir
 			// 
-			this.tbDestinationDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.tbDestDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.tbDestinationDir.Location = new System.Drawing.Point(106, 62);
-			this.tbDestinationDir.Name = "tbDestinationDir";
-			this.tbDestinationDir.ReadOnly = true;
-			this.tbDestinationDir.Size = new System.Drawing.Size(453, 20);
-			this.tbDestinationDir.TabIndex = 13;
-			this.tbDestinationDir.Text = ".\\..\\..\\..\\..\\..\\dest";
+			this.tbDestDir.Location = new System.Drawing.Point(121, 62);
+			this.tbDestDir.Name = "tbDestDir";
+			this.tbDestDir.ReadOnly = true;
+			this.tbDestDir.Size = new System.Drawing.Size(438, 20);
+			this.tbDestDir.TabIndex = 13;
+			this.tbDestDir.Text = ".\\..\\..\\..\\..\\dest";
 			// 
 			// lblTotalFilesFound
 			// 
@@ -295,9 +321,11 @@ namespace DuplicateFileFinder
 			// 
 			// splitContainer.Panel1
 			// 
+			this.splitContainer.Panel1.Controls.Add(this.radCompareContents);
+			this.splitContainer.Panel1.Controls.Add(this.radCompareFilenames);
 			this.splitContainer.Panel1.Controls.Add(this.btnCopyAll);
-			this.splitContainer.Panel1.Controls.Add(this.lblTopmostDir);
-			this.splitContainer.Panel1.Controls.Add(this.tbTopmostDir);
+			this.splitContainer.Panel1.Controls.Add(this.lblSourceDir);
+			this.splitContainer.Panel1.Controls.Add(this.tbSourceDir);
 			this.splitContainer.Panel1.Controls.Add(this.cbSearchSubDirs);
 			this.splitContainer.Panel1.Controls.Add(this.btnBrowse_TopmostDir);
 			this.splitContainer.Panel1.Controls.Add(this.tbUniqueFilesFound);
@@ -307,12 +335,12 @@ namespace DuplicateFileFinder
 			this.splitContainer.Panel1.Controls.Add(this.lblTotalFilesFound);
 			this.splitContainer.Panel1.Controls.Add(this.tbFileExtensions);
 			this.splitContainer.Panel1.Controls.Add(this.tbTotalFilesFound);
-			this.splitContainer.Panel1.Controls.Add(this.button1);
+			this.splitContainer.Panel1.Controls.Add(this.btnFindFiles);
 			this.splitContainer.Panel1.Controls.Add(this.btnBrowse_DestDir);
 			this.splitContainer.Panel1.Controls.Add(this.dgvFoundFiles);
-			this.splitContainer.Panel1.Controls.Add(this.label1);
+			this.splitContainer.Panel1.Controls.Add(this.lblDestDir);
 			this.splitContainer.Panel1.Controls.Add(this.btnClearFoundFiles);
-			this.splitContainer.Panel1.Controls.Add(this.tbDestinationDir);
+			this.splitContainer.Panel1.Controls.Add(this.tbDestDir);
 			this.splitContainer.Panel1.Controls.Add(this.btnCopyUnique);
 			// 
 			// splitContainer.Panel2
@@ -355,23 +383,23 @@ namespace DuplicateFileFinder
 		}
 
 		#endregion
-		private Label lblTopmostDir;
+		private Label lblSourceDir;
 		private Button btnBrowse_TopmostDir;
 		private FolderBrowserDialog folderBrowserDialog1;
 		private Button btnAllImages;
 		private Label lblFileExtensions;
-		private TextBox tbTopmostDir;
+		private TextBox tbSourceDir;
 		private TextBox tbFileExtensions;
 		private ToolTip toolTip1;
-		private Button button1;
+		private Button btnFindFiles;
 		private ContextMenuStrip contextMenuStrip1;
 		private DataGridView dgvFoundFiles;
 		private FlowLayoutPanel imageContainer;
 		private Button btnClearFoundFiles;
 		private Button btnCopyUnique;
 		private Button btnBrowse_DestDir;
-		private Label label1;
-		private TextBox tbDestinationDir;
+		private Label lblDestDir;
+		private TextBox tbDestDir;
 		private Label lblTotalFilesFound;
 		private TextBox tbTotalFilesFound;
 		private Label lblUniqueFilesFound;
@@ -379,6 +407,8 @@ namespace DuplicateFileFinder
 		private CheckBox cbSearchSubDirs;
 		private SplitContainer splitContainer;
 		private Button btnCopyAll;
+		private RadioButton radCompareContents;
+		private RadioButton radCompareFilenames;
 	}
 }
 

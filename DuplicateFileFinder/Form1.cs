@@ -5,8 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace DuplicateFileFinder
 {
@@ -14,8 +16,11 @@ namespace DuplicateFileFinder
 	{
 		List<string> imageFileExtensions = new List<string> { "jpg", "png", "bmp", "tiff" };
 		BindingList<foundFile> foundFiles = new BindingList<foundFile>();
+		/// <summary>
+		/// Comparing by filename: Key = filename. By hash: Key = hash.  Always: Value = list of paths
+		/// </summary>
 		Dictionary<string, List<string>> duplicateDict = new Dictionary<string, List<string>>();
-		int test = 1;
+		private bool ComparedByFilename = true;
 
 		public Form1()
 		{
@@ -43,9 +48,14 @@ namespace DuplicateFileFinder
 
 		private void btnBrowse_Click(object sender, EventArgs e)
 		{
+			if (Directory.Exists(tbSourceDir.Text))
+			{
+				folderBrowserDialog1.SelectedPath = Path.GetFullPath(tbSourceDir.Text);
+			}
+
 			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
 			{
-				tbTopmostDir.Text = folderBrowserDialog1.SelectedPath;
+				tbSourceDir.Text = folderBrowserDialog1.SelectedPath;
 			}
 		}
 
@@ -59,23 +69,36 @@ namespace DuplicateFileFinder
 			tbFileExtensions.Text = tbFileExtensions.Text.Trim().Trim(',');
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void btnFindFiles_Click(object sender, EventArgs e)
 		{
-			findFiles();
+			tbTotalFilesFound.Clear();
+			tbUniqueFilesFound.Clear();
+			ClearImagePreviews();
+
+			Cursor = Cursors.WaitCursor;
+
+			if (radCompareFilenames.Checked)
+			{
+				FindDuplicates_Filenames(FindFiles());
+			}
+			else if (radCompareContents.Checked)
+			{
+				FindDuplicates_Contents(FindFiles());
+			}
+			else
+			{
+				MessageBox.Show("Must choose to compare files by either filename or contents", "Invalid Choice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+
+			Cursor = Cursors.Default;
+
+			tbTotalFilesFound.Text = foundFiles.Count.ToString();
+			tbUniqueFilesFound.Text = duplicateDict.Count.ToString();
 		}
 
 
-		private BindingList<foundFile> findFiles()
+		private List<string> FindFiles()
 		{
-			//BeginInvoke(delegate 
-			//{
-			foundFiles.Clear();
-			duplicateDict.Clear();
-			tbTotalFilesFound.Clear();
-			tbUniqueFilesFound.Clear();
-			Cursor = Cursors.WaitCursor;
-			//});
-
 			//create search pattern
 			var patterns = new List<string>();
 			var extensionList = tbFileExtensions.Text.Split(',');
@@ -85,38 +108,46 @@ namespace DuplicateFileFinder
 			}
 
 			//Get topmost dir
-			string topmostDir = Path.GetFullPath(tbTopmostDir.Text);
+			string sourceDir = Path.GetFullPath(tbSourceDir.Text);
 
 			//Make sure dir is valid
-			if (!Directory.Exists(topmostDir))
+			if (!Directory.Exists(sourceDir))
 			{
-				MessageBox.Show($"Invalid TopmostDirectory:\n\n{topmostDir}", "Invalid Topmost Directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show($"Invalid source directory:\n\n{sourceDir}", "Invalid source Directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return null;
 			}
 
-			var files = new BindingList<foundFile>();
+			var files = new List<string>();
 
 			foreach (var pattern in patterns)
 			{
-				//Start searching
-				var rawFiles = Directory.GetFiles(topmostDir, pattern, cbSearchSubDirs.Checked ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+				var rawFiles = Directory.GetFiles(sourceDir, pattern, cbSearchSubDirs.Checked ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+				files.AddRange(rawFiles);
+			}
 
-				foreach (var file in rawFiles)
+			return files;
+		}
+
+		private void FindDuplicates_Filenames(List<string> files)
+		{
+			foundFiles.Clear();
+			duplicateDict.Clear();
+			ComparedByFilename = true;
+
+			foreach (var file in files)
+			{
+				var filename = Path.GetFileName(file);
+
+				if (!duplicateDict.ContainsKey(filename))
 				{
-					var filename = Path.GetFileName(file);
-
-					if (!duplicateDict.ContainsKey(filename))
-					{
-						duplicateDict.Add(filename, new List<string> { file });
-					}
-					else
-					{
-						duplicateDict[filename].Add(file);
-					}
+					duplicateDict.Add(filename, new List<string> { file });
+				}
+				else
+				{
+					duplicateDict[filename].Add(file);
 				}
 			}
 
-			//first build a dictionary of all found files, then add them to foundFiles
 			foreach (var kvp in duplicateDict)
 			{
 				foreach (var path in kvp.Value)
@@ -129,51 +160,116 @@ namespace DuplicateFileFinder
 					foundFiles.Add(newFile);
 				}
 			}
+		}
 
-			tbTotalFilesFound.Text = foundFiles.Count.ToString();
-			tbUniqueFilesFound.Text = duplicateDict.Count.ToString();
+		private void FindDuplicates_Contents(List<string> files)
+		{
+			foundFiles.Clear();
+			duplicateDict.Clear();
+			ComparedByFilename = false;
 
-			Cursor = Cursors.Default;
+			foreach (var file in files)
+			{
+				var fileHash = GetFileHash(file);
 
-			return files;
+				if (!duplicateDict.ContainsKey(fileHash))
+				{
+					duplicateDict.Add(fileHash, new List<string> { file });
+				}
+				else
+				{
+					duplicateDict[fileHash].Add(file);
+				}
+			}
+
+			foreach (var kvp in duplicateDict)
+			{
+				foreach (var path in kvp.Value)
+				{
+					var newFile = new foundFile();
+					newFile.duplicate = kvp.Value.Count > 1;
+					newFile.path = path;
+					newFile.filename = Path.GetFileName(path);
+					newFile.count = kvp.Value.Count;
+					newFile.hash = kvp.Key;
+
+					foundFiles.Add(newFile);
+				}
+			}
 		}
 
 		private void dgvFoundFiles_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex < 0) return;  //they clicked a column header
-			var row = ((DataGridView)sender).Rows[e.RowIndex];
-			var cell = row.Cells[e.ColumnIndex];
-			var columnName = cell.OwningColumn.Name;
-
-			if (columnName == "viewSingle")
+			try
 			{
-				//View just this picture
-				AddImagesToView(new List<string> { (string)dgvFoundFiles.Rows[e.RowIndex].Cells["path"].Value });
+				if (e.RowIndex < 0) return;  //they clicked a column header
+				var row = ((DataGridView)sender).Rows[e.RowIndex];
+				var cell = row.Cells[e.ColumnIndex];
+				var columnName = cell.OwningColumn.Name;
 
+				if (columnName == "viewSingle")
+				{
+					//View just this picture
+					SetPreviewImages(new List<string> { (string)dgvFoundFiles.Rows[e.RowIndex].Cells["path"].Value });
+
+				}
+				else if (columnName == "viewDuplicates")
+				{
+					//View this picture and all with duplicate names
+					if (ComparedByFilename)
+					{
+						SetPreviewImages(duplicateDict[row.Cells["filename"].Value.ToString()]);
+					}
+					else
+					{
+						string hash = GetFileHash(row.Cells["path"].Value.ToString());
+						SetPreviewImages(duplicateDict[hash]);
+					}
+				}
 			}
-			else if (columnName == "viewDuplicates")
+			catch (Exception ex)
 			{
-				//View this picture and all with duplicate names
-				AddImagesToView(duplicateDict[row.Cells["filename"].Value.ToString()]);
+				MessageBox.Show($"Error handling cell content click.\n\n{ex.Message}");
+			}
+			
+		}
+
+		private void SetPreviewImages(List<string> paths)
+		{
+			try
+			{
+				ClearImagePreviews();
+
+				foreach (var path in paths)
+				{
+					var newPV = new PictureViewer();
+					newPV.Filename = Path.GetFileName(path);
+					newPV.Path = path;
+					newPV.Image = Image.FromFile(path);
+					newPV.Width = 400;
+					newPV.Height = 300;
+					imageContainer.Controls.Add(newPV);
+
+					newPV.DeleteRequested += NewPV_DeleteRequested;
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Error adding images to view.\n\n{ex.Message}");
 			}
 		}
 
-		private void AddImagesToView(List<string> paths, bool clearView = true)
+		private void ClearImagePreviews()
 		{
-			if (clearView) imageContainer.Controls.Clear();
-
-			foreach (var path in paths)
+			foreach (var control in imageContainer.Controls)
 			{
-				var newPV = new PictureViewer();
-				newPV.Filename = Path.GetFileName(path);
-				newPV.Path = path;
-				newPV.Image = Image.FromFile(path);
-				newPV.Width = 400;
-				newPV.Height = 300;
-				imageContainer.Controls.Add(newPV);
-
-				newPV.DeleteRequested += NewPV_DeleteRequested;
+				if (control is PictureViewer)
+				{
+					((PictureViewer)control).Image.Dispose();
+					((PictureViewer)control).Dispose();
+				}
 			}
+			imageContainer.Controls.Clear();
 		}
 
 		private void NewPV_DeleteRequested(object sender, EventArgs e)
@@ -186,6 +282,7 @@ namespace DuplicateFileFinder
 			//First let go of the image
 			var path = pv.Path;
 			var filename = pv.Filename;
+			var hash = GetFileHash(path);
 
 			imageContainer.Controls.Remove(pv);
 			pv.Image.Dispose();
@@ -209,15 +306,23 @@ namespace DuplicateFileFinder
 
 			//Deletion was successful
 			//Delete the records of the image
+			string key = "";
 			for (int i = 0; i < foundFiles.Count; i++)
 			{
 				if (foundFiles[i].path == path)
 				{
 					foundFiles.RemoveAt(i);
-					duplicateDict[filename].Remove(path);
-					if (duplicateDict[filename].Count == 0)
+					
+
+					if (ComparedByFilename)
+						key = path;
+					else
+						key = hash;
+
+					duplicateDict[key].Remove(path);
+					if (duplicateDict[key].Count == 0)
 					{
-						duplicateDict.Remove(filename);
+						duplicateDict.Remove(key);
 					}
 
 					break;
@@ -225,7 +330,7 @@ namespace DuplicateFileFinder
 			}
 
 			//update the counts of the other copies of that image
-			var otherDuplicates = foundFiles.Where(x => x.filename == filename);
+			var otherDuplicates = foundFiles.Where(x => x.hash == key);
 			foreach (var otherDuplicate in otherDuplicates)
 			{
 				otherDuplicate.count--;
@@ -257,19 +362,29 @@ namespace DuplicateFileFinder
 		{
 			foundFiles.Clear();
 			duplicateDict.Clear();
+
+			tbTotalFilesFound.Clear();
+			tbUniqueFilesFound.Clear();
+
+			ClearImagePreviews();
 		}
 
 		private void btnBrowse_DestDir_Click(object sender, EventArgs e)
 		{
+			if (Directory.Exists(tbDestDir.Text))
+			{
+				folderBrowserDialog1.SelectedPath = Path.GetFullPath(tbDestDir.Text);
+			}
+
 			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
 			{
-				tbDestinationDir.Text = folderBrowserDialog1.SelectedPath;
+				tbDestDir.Text = folderBrowserDialog1.SelectedPath;
 			}
 		}
 
 		private void btnCopyUnique_Click(object sender, EventArgs e)
 		{
-			string dest = tbDestinationDir.Text;
+			string dest = tbDestDir.Text;
 			var fileList = new List<string>();
 			foreach (var kvp in duplicateDict)
 			{
@@ -281,7 +396,7 @@ namespace DuplicateFileFinder
 
 		private void btnCopyAll_Click(object sender, EventArgs e)
 		{
-			string dest = tbDestinationDir.Text;
+			string dest = tbDestDir.Text;
 			var fileList = new List<string>();
 			foreach (var file in foundFiles)
 			{
@@ -340,6 +455,39 @@ namespace DuplicateFileFinder
 			Cursor = Cursors.Default;
 
 			MessageBox.Show($"Successfully copied {successCount} of {files.Count} files", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		private void btnHashTest_Click(object sender, EventArgs e)
+		{
+			string file1 = "C:\\Users\\carso\\Documents\\Programming\\DuplicateFileFinder\\source\\test1.jpg";
+			Debug.WriteLine(GetFileHash(file1));
+		}
+
+		private string GetFileHash(string file)
+		{
+			try
+			{
+				HashAlgorithm hash = HashAlgorithm.Create();
+				byte[] fileHash;
+
+				using (FileStream fileStream1 = new FileStream(file, FileMode.Open, FileAccess.Read))
+				{
+					// Compute file hashes
+					fileHash = hash.ComputeHash(fileStream1);
+				}
+
+				return BitConverter.ToString(fileHash);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Error generating file hash for:\n\n{file}\n\n{ex.Message}");
+				return null;
+			}
+		}
+
+		private long GetFileSize(string file)
+		{
+			return new FileInfo(file).Length;
 		}
 	}
 }
