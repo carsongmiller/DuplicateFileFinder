@@ -35,6 +35,7 @@
 			this.lblName = new System.Windows.Forms.Label();
 			this.tbName = new System.Windows.Forms.TextBox();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.btnDelete = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -57,7 +58,7 @@
 			this.tbPath.Location = new System.Drawing.Point(49, 3);
 			this.tbPath.Name = "tbPath";
 			this.tbPath.ReadOnly = true;
-			this.tbPath.Size = new System.Drawing.Size(578, 23);
+			this.tbPath.Size = new System.Drawing.Size(499, 23);
 			this.tbPath.TabIndex = 1;
 			// 
 			// lblPath
@@ -87,20 +88,32 @@
 			this.tbName.Location = new System.Drawing.Point(49, 32);
 			this.tbName.Name = "tbName";
 			this.tbName.ReadOnly = true;
-			this.tbName.Size = new System.Drawing.Size(578, 23);
+			this.tbName.Size = new System.Drawing.Size(499, 23);
 			this.tbName.TabIndex = 4;
+			// 
+			// btnDelete
+			// 
+			this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDelete.Location = new System.Drawing.Point(554, 31);
+			this.btnDelete.Name = "btnDelete";
+			this.btnDelete.Size = new System.Drawing.Size(75, 23);
+			this.btnDelete.TabIndex = 5;
+			this.btnDelete.Text = "Delete";
+			this.btnDelete.UseVisualStyleBackColor = true;
+			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
 			// PictureViewer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.Controls.Add(this.btnDelete);
 			this.Controls.Add(this.tbName);
 			this.Controls.Add(this.lblName);
 			this.Controls.Add(this.lblPath);
 			this.Controls.Add(this.tbPath);
 			this.Controls.Add(this.pictureBox);
-			this.Name = "PictureViewer";
+			this.Filename = "PictureViewer";
 			this.Size = new System.Drawing.Size(632, 463);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
 			this.ResumeLayout(false);
@@ -116,5 +129,6 @@
 		private Label lblName;
 		private TextBox tbName;
 		private ToolTip toolTip1;
+		private Button btnDelete;
 	}
 }

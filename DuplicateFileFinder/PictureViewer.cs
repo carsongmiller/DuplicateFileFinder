@@ -12,7 +12,7 @@ namespace DuplicateFileFinder
 {
 	public partial class PictureViewer : UserControl
 	{
-		public string Name
+		public string Filename
 		{
 			get
 			{
@@ -51,9 +51,25 @@ namespace DuplicateFileFinder
 			}
 		}
 
+		/// <summary>
+		/// The user requested the image to be deleted.  Please do so
+		/// </summary>
+		public event EventHandler DeleteRequested;
+
+
 		public PictureViewer()
 		{
 			InitializeComponent();
+		}
+
+		private void btnDelete_Click(object sender, EventArgs e)
+		{
+			if (MessageBox.Show("Are you sure you'd like to delete this image?  Image will be moved to the recycle bin.", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+			{
+				//Let the image be deleted a level up
+				//Can't be deleted here because the main form is using the image
+				DeleteRequested?.Invoke(this, EventArgs.Empty);
+			}
 		}
 	}
 }

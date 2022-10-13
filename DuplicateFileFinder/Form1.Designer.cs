@@ -195,9 +195,9 @@
 			this.btnCopyUnique.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCopyUnique.Location = new System.Drawing.Point(208, 178);
 			this.btnCopyUnique.Name = "btnCopyUnique";
-			this.btnCopyUnique.Size = new System.Drawing.Size(89, 23);
+			this.btnCopyUnique.Size = new System.Drawing.Size(133, 23);
 			this.btnCopyUnique.TabIndex = 12;
-			this.btnCopyUnique.Text = "Copy Unique";
+			this.btnCopyUnique.Text = "Copy Only Unique";
 			this.btnCopyUnique.UseVisualStyleBackColor = true;
 			this.btnCopyUnique.Click += new System.EventHandler(this.btnCopyUnique_Click);
 			// 
@@ -230,7 +230,7 @@
 			this.tbDestinationDir.ReadOnly = true;
 			this.tbDestinationDir.Size = new System.Drawing.Size(427, 23);
 			this.tbDestinationDir.TabIndex = 13;
-			this.tbDestinationDir.Text = ".\\..\\..\\..\\..\\..\\Destination";
+			this.tbDestinationDir.Text = ".\\..\\..\\..\\..\\..\\dest";
 			// 
 			// lblTotalFilesFound
 			// 
@@ -323,7 +323,7 @@
 			// btnCopyAll
 			// 
 			this.btnCopyAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCopyAll.Location = new System.Drawing.Point(303, 178);
+			this.btnCopyAll.Location = new System.Drawing.Point(347, 178);
 			this.btnCopyAll.Name = "btnCopyAll";
 			this.btnCopyAll.Size = new System.Drawing.Size(89, 23);
 			this.btnCopyAll.TabIndex = 21;

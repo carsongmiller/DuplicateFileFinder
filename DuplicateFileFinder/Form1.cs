@@ -159,13 +159,74 @@ namespace DuplicateFileFinder
 			foreach (var path in paths)
 			{
 				var newPV = new PictureViewer();
-				newPV.Name = Path.GetFileName(path);
+				newPV.Filename = Path.GetFileName(path);
 				newPV.Path = path;
 				newPV.Image = Image.FromFile(path);
 				newPV.Width = 400;
 				newPV.Height = 300;
 				imageContainer.Controls.Add(newPV);
+
+				newPV.DeleteRequested += NewPV_DeleteRequested;
 			}
+		}
+
+		private void NewPV_DeleteRequested(object? sender, EventArgs e)
+		{
+			DeleteImage(((PictureViewer)sender));
+		}
+
+		private void DeleteImage(PictureViewer pv)
+		{
+			//First let go of the image
+			var path = pv.Path;
+			var filename = pv.Filename;
+
+			imageContainer.Controls.Remove(pv);
+			pv.Image.Dispose();
+			pv.Dispose();
+
+			//Delete the image
+			try
+			{
+				Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(path, Microsoft.VisualBasic.FileIO.UIOption.AllDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+			}
+			catch (OperationCanceledException ex)
+			{
+				//do nothing, the user just cancelled the operation
+				return;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Error while attempting to delete file\n\n{path}\n\n{ex.Message}");
+				return;
+			}
+
+			//Deletion was successful
+			//Delete the records of the image
+			for (int i = 0; i < foundFiles.Count; i++)
+			{
+				if (foundFiles[i].path == path)
+				{
+					foundFiles.RemoveAt(i);
+					duplicateDict[filename].Remove(path);
+					if (duplicateDict[filename].Count == 0)
+					{
+						duplicateDict.Remove(filename);
+					}
+
+					break;
+				}
+			}
+
+			//update the counts of the other copies of that image
+			var otherDuplicates = foundFiles.Where(x => x.filename == filename);
+			foreach (var otherDuplicate in otherDuplicates)
+			{
+				otherDuplicate.count--;
+			}
+
+			tbTotalFilesFound.Text = foundFiles.Count.ToString();
+			tbUniqueFilesFound.Text = duplicateDict.Count.ToString();
 		}
 
 		private void dgvFoundFiles_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
