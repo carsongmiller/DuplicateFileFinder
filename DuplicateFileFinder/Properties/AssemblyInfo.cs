@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DuplicateFileFinder")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Finds duplicate files (mostly images ...) and does useful things with them")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Razer")]
+[assembly: AssemblyCompany("Carson Miller")]
 [assembly: AssemblyProduct("DuplicateFileFinder")]
-[assembly: AssemblyCopyright("Copyright © Razer 2022")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
