@@ -49,21 +49,21 @@ namespace DuplicateFileFinder
 			this.btnExportAll = new System.Windows.Forms.Button();
 			this.btnExportUnique = new System.Windows.Forms.Button();
 			this.btnFindFiles = new System.Windows.Forms.Button();
+			this.btnClearFoundFiles = new System.Windows.Forms.Button();
+			this.btnBrowse_DestDir = new System.Windows.Forms.Button();
+			this.cbSearchSubDirs = new System.Windows.Forms.CheckBox();
+			this.btnOpenDestDir = new System.Windows.Forms.Button();
+			this.btnOpenSourceDir = new System.Windows.Forms.Button();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.dgvFoundFiles = new System.Windows.Forms.DataGridView();
 			this.imageContainer = new System.Windows.Forms.FlowLayoutPanel();
-			this.btnClearFoundFiles = new System.Windows.Forms.Button();
-			this.btnBrowse_DestDir = new System.Windows.Forms.Button();
 			this.lblDestDir = new System.Windows.Forms.Label();
 			this.tbDestDir = new System.Windows.Forms.TextBox();
 			this.lblTotalFilesFound = new System.Windows.Forms.Label();
 			this.tbTotalFilesFound = new System.Windows.Forms.TextBox();
 			this.lblUniqueFilesFound = new System.Windows.Forms.Label();
 			this.tbUniqueFilesFound = new System.Windows.Forms.TextBox();
-			this.cbSearchSubDirs = new System.Windows.Forms.CheckBox();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
-			this.btnOpenDestDir = new System.Windows.Forms.Button();
-			this.btnOpenSourceDir = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvFoundFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
 			this.splitContainer.Panel1.SuspendLayout();
@@ -161,7 +161,6 @@ namespace DuplicateFileFinder
 			// 
 			// btnCopyAll
 			// 
-			this.btnCopyAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCopyAll.Location = new System.Drawing.Point(130, 202);
 			this.btnCopyAll.Name = "btnCopyAll";
 			this.btnCopyAll.Size = new System.Drawing.Size(71, 23);
@@ -173,7 +172,6 @@ namespace DuplicateFileFinder
 			// 
 			// btnCopyUnique
 			// 
-			this.btnCopyUnique.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnCopyUnique.Location = new System.Drawing.Point(10, 202);
 			this.btnCopyUnique.Name = "btnCopyUnique";
 			this.btnCopyUnique.Size = new System.Drawing.Size(114, 23);
@@ -223,6 +221,69 @@ namespace DuplicateFileFinder
 			this.btnFindFiles.UseVisualStyleBackColor = true;
 			this.btnFindFiles.Click += new System.EventHandler(this.btnFindFiles_Click);
 			// 
+			// btnClearFoundFiles
+			// 
+			this.btnClearFoundFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnClearFoundFiles.Location = new System.Drawing.Point(558, 173);
+			this.btnClearFoundFiles.Name = "btnClearFoundFiles";
+			this.btnClearFoundFiles.Size = new System.Drawing.Size(71, 23);
+			this.btnClearFoundFiles.TabIndex = 11;
+			this.btnClearFoundFiles.Text = "Clear";
+			this.toolTip1.SetToolTip(this.btnClearFoundFiles, "Clear file list and image previews");
+			this.btnClearFoundFiles.UseVisualStyleBackColor = true;
+			this.btnClearFoundFiles.Click += new System.EventHandler(this.btnClearFoundFiles_Click);
+			// 
+			// btnBrowse_DestDir
+			// 
+			this.btnBrowse_DestDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnBrowse_DestDir.Location = new System.Drawing.Point(495, 60);
+			this.btnBrowse_DestDir.Name = "btnBrowse_DestDir";
+			this.btnBrowse_DestDir.Size = new System.Drawing.Size(64, 23);
+			this.btnBrowse_DestDir.TabIndex = 15;
+			this.btnBrowse_DestDir.Text = "Browse";
+			this.toolTip1.SetToolTip(this.btnBrowse_DestDir, "Browse for a destination directory");
+			this.btnBrowse_DestDir.UseVisualStyleBackColor = true;
+			this.btnBrowse_DestDir.Click += new System.EventHandler(this.btnBrowse_DestDir_Click);
+			// 
+			// cbSearchSubDirs
+			// 
+			this.cbSearchSubDirs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.cbSearchSubDirs.AutoSize = true;
+			this.cbSearchSubDirs.Checked = true;
+			this.cbSearchSubDirs.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbSearchSubDirs.Location = new System.Drawing.Point(494, 10);
+			this.cbSearchSubDirs.Name = "cbSearchSubDirs";
+			this.cbSearchSubDirs.Size = new System.Drawing.Size(135, 17);
+			this.cbSearchSubDirs.TabIndex = 20;
+			this.cbSearchSubDirs.Text = "Search Sub-Directories";
+			this.toolTip1.SetToolTip(this.cbSearchSubDirs, "Select whether to include sub-directories within the sourec directory in the sear" +
+        "ch");
+			this.cbSearchSubDirs.UseVisualStyleBackColor = true;
+			// 
+			// btnOpenDestDir
+			// 
+			this.btnOpenDestDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOpenDestDir.Location = new System.Drawing.Point(565, 60);
+			this.btnOpenDestDir.Name = "btnOpenDestDir";
+			this.btnOpenDestDir.Size = new System.Drawing.Size(64, 23);
+			this.btnOpenDestDir.TabIndex = 25;
+			this.btnOpenDestDir.Text = "Open";
+			this.toolTip1.SetToolTip(this.btnOpenDestDir, "Open destination directory");
+			this.btnOpenDestDir.UseVisualStyleBackColor = true;
+			this.btnOpenDestDir.Click += new System.EventHandler(this.btnOpenDestDir_Click);
+			// 
+			// btnOpenSourceDir
+			// 
+			this.btnOpenSourceDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOpenSourceDir.Location = new System.Drawing.Point(424, 8);
+			this.btnOpenSourceDir.Name = "btnOpenSourceDir";
+			this.btnOpenSourceDir.Size = new System.Drawing.Size(64, 23);
+			this.btnOpenSourceDir.TabIndex = 24;
+			this.btnOpenSourceDir.Text = "Open";
+			this.toolTip1.SetToolTip(this.btnOpenSourceDir, "Open source directory");
+			this.btnOpenSourceDir.UseVisualStyleBackColor = true;
+			this.btnOpenSourceDir.Click += new System.EventHandler(this.btnOpenSourceDir_Click);
+			// 
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -264,30 +325,6 @@ namespace DuplicateFileFinder
 			this.imageContainer.Name = "imageContainer";
 			this.imageContainer.Size = new System.Drawing.Size(480, 489);
 			this.imageContainer.TabIndex = 10;
-			// 
-			// btnClearFoundFiles
-			// 
-			this.btnClearFoundFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnClearFoundFiles.Location = new System.Drawing.Point(558, 173);
-			this.btnClearFoundFiles.Name = "btnClearFoundFiles";
-			this.btnClearFoundFiles.Size = new System.Drawing.Size(71, 23);
-			this.btnClearFoundFiles.TabIndex = 11;
-			this.btnClearFoundFiles.Text = "Clear";
-			this.toolTip1.SetToolTip(this.btnClearFoundFiles, "Clear file list and image previews");
-			this.btnClearFoundFiles.UseVisualStyleBackColor = true;
-			this.btnClearFoundFiles.Click += new System.EventHandler(this.btnClearFoundFiles_Click);
-			// 
-			// btnBrowse_DestDir
-			// 
-			this.btnBrowse_DestDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnBrowse_DestDir.Location = new System.Drawing.Point(495, 60);
-			this.btnBrowse_DestDir.Name = "btnBrowse_DestDir";
-			this.btnBrowse_DestDir.Size = new System.Drawing.Size(64, 23);
-			this.btnBrowse_DestDir.TabIndex = 15;
-			this.btnBrowse_DestDir.Text = "Browse";
-			this.toolTip1.SetToolTip(this.btnBrowse_DestDir, "Browse for a destination directory");
-			this.btnBrowse_DestDir.UseVisualStyleBackColor = true;
-			this.btnBrowse_DestDir.Click += new System.EventHandler(this.btnBrowse_DestDir_Click);
 			// 
 			// lblDestDir
 			// 
@@ -347,21 +384,6 @@ namespace DuplicateFileFinder
 			this.tbUniqueFilesFound.TabIndex = 19;
 			this.tbUniqueFilesFound.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			// 
-			// cbSearchSubDirs
-			// 
-			this.cbSearchSubDirs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.cbSearchSubDirs.AutoSize = true;
-			this.cbSearchSubDirs.Checked = true;
-			this.cbSearchSubDirs.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cbSearchSubDirs.Location = new System.Drawing.Point(494, 10);
-			this.cbSearchSubDirs.Name = "cbSearchSubDirs";
-			this.cbSearchSubDirs.Size = new System.Drawing.Size(135, 17);
-			this.cbSearchSubDirs.TabIndex = 20;
-			this.cbSearchSubDirs.Text = "Search Sub-Directories";
-			this.toolTip1.SetToolTip(this.cbSearchSubDirs, "Select whether to include sub-directories within the sourec directory in the sear" +
-        "ch");
-			this.cbSearchSubDirs.UseVisualStyleBackColor = true;
-			// 
 			// splitContainer
 			// 
 			this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -405,30 +427,6 @@ namespace DuplicateFileFinder
 			this.splitContainer.SplitterDistance = 636;
 			this.splitContainer.SplitterWidth = 3;
 			this.splitContainer.TabIndex = 21;
-			// 
-			// btnOpenDestDir
-			// 
-			this.btnOpenDestDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOpenDestDir.Location = new System.Drawing.Point(565, 60);
-			this.btnOpenDestDir.Name = "btnOpenDestDir";
-			this.btnOpenDestDir.Size = new System.Drawing.Size(64, 23);
-			this.btnOpenDestDir.TabIndex = 25;
-			this.btnOpenDestDir.Text = "Open";
-			this.toolTip1.SetToolTip(this.btnOpenDestDir, "Open destination directory");
-			this.btnOpenDestDir.UseVisualStyleBackColor = true;
-			this.btnOpenDestDir.Click += new System.EventHandler(this.btnOpenDestDir_Click);
-			// 
-			// btnOpenSourceDir
-			// 
-			this.btnOpenSourceDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnOpenSourceDir.Location = new System.Drawing.Point(424, 8);
-			this.btnOpenSourceDir.Name = "btnOpenSourceDir";
-			this.btnOpenSourceDir.Size = new System.Drawing.Size(64, 23);
-			this.btnOpenSourceDir.TabIndex = 24;
-			this.btnOpenSourceDir.Text = "Open";
-			this.toolTip1.SetToolTip(this.btnOpenSourceDir, "Open source directory");
-			this.btnOpenSourceDir.UseVisualStyleBackColor = true;
-			this.btnOpenSourceDir.Click += new System.EventHandler(this.btnOpenSourceDir_Click);
 			// 
 			// Form1
 			// 

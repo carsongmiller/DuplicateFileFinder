@@ -315,7 +315,7 @@ namespace DuplicateFileFinder
 					
 
 					if (ComparedByFilename)
-						key = path;
+						key = filename;
 					else
 						key = hash;
 
@@ -457,12 +457,6 @@ namespace DuplicateFileFinder
 			MessageBox.Show($"Successfully copied {successCount} of {files.Count} files", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 
-		private void btnHashTest_Click(object sender, EventArgs e)
-		{
-			string file1 = "C:\\Users\\carso\\Documents\\Programming\\DuplicateFileFinder\\source\\test1.jpg";
-			Debug.WriteLine(GetFileHash(file1));
-		}
-
 		private string GetFileHash(string file)
 		{
 			try
@@ -475,6 +469,8 @@ namespace DuplicateFileFinder
 					// Compute file hashes
 					fileHash = hash.ComputeHash(fileStream1);
 				}
+
+				hash.Dispose();
 
 				return BitConverter.ToString(fileHash);
 			}
