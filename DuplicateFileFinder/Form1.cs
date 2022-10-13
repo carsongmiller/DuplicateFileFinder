@@ -489,5 +489,132 @@ namespace DuplicateFileFinder
 		{
 			return new FileInfo(file).Length;
 		}
+
+		private void btnOpenSourceDir_Click(object sender, EventArgs e)
+		{
+			var dir = tbSourceDir.Text;
+			if (Directory.Exists(dir))
+			{
+				ProcessStartInfo startInfo = new ProcessStartInfo
+				{
+					Arguments = dir,
+					FileName = "explorer.exe"
+				};
+
+				Process.Start(startInfo);
+			}
+			else
+			{
+				MessageBox.Show($"Directory does not exist:\n\n{dir}");
+			}
+		}
+
+		private void btnOpenDestDir_Click(object sender, EventArgs e)
+		{
+			var dir = tbDestDir.Text;
+			if (Directory.Exists(dir))
+			{
+				ProcessStartInfo startInfo = new ProcessStartInfo
+				{
+					Arguments = dir,
+					FileName = "explorer.exe"
+				};
+
+				Process.Start(startInfo);
+			}
+			else
+			{
+				MessageBox.Show($"Directory does not exist:\n\n{dir}");
+			}
+		}
+
+		private void btnExportAll_Click(object sender, EventArgs e)
+		{
+			string contents = "";
+			var fullpath = Path.GetFullPath(tbDestDir.Text) + "\\AllFiles.txt";
+
+			contents += $"Created on: {DateTime.Now}\n";
+			if (ComparedByFilename)
+			{
+				contents += "Files compared by filename\n\n";
+			}
+			else
+			{
+				contents += "Files compared by contents\n\n";
+			}
+
+			foreach (var file in foundFiles)
+			{
+				contents += $"{file.path}\n";
+			}
+
+			WriteToTxt(fullpath, contents);
+		}
+
+		private void btnExportUnique_Click(object sender, EventArgs e)
+		{
+			string contents = "";
+			var fullpath = Path.GetFullPath(tbDestDir.Text) + "\\UniqueFiles.txt";
+
+
+			contents += $"Created on: {DateTime.Now}\n";
+			if (ComparedByFilename)
+			{
+				contents += "Files compared by filename\n\n";
+			}
+			else
+			{
+				contents += "Files compared by contents\n\n";
+			}
+
+			foreach (var kvp in duplicateDict)
+			{
+				contents += $"{kvp.Value[0]}\n";
+			}
+
+			WriteToTxt(fullpath, contents);
+		}
+
+		private void WriteToTxt(string filepath, string contents, bool openWhenComplete = true)
+		{
+			string dir = Path.GetDirectoryName(filepath);
+
+			try
+			{
+				if (!Directory.Exists(dir))
+				{
+					if (MessageBox.Show
+						($"Destination directory does not exist:\n\n{dir}\n\nCreate it now?",
+						"Directory Does Not Exist",
+						MessageBoxButtons.YesNo,
+						MessageBoxIcon.Question) == DialogResult.Yes)
+					{
+						Directory.CreateDirectory(dir);
+					}
+					else
+					{
+						return;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Error concerning destination directory:\n\n{dir}\n\n{ex.Message}");
+				return;
+			}
+
+			try
+			{
+				using (StreamWriter sw = File.CreateText(filepath))
+				{
+					sw.Write(contents);
+				}
+				Process.Start(filepath);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Error writing to text file\n\n{ex.Message}");
+			}
+		}
 	}
 }

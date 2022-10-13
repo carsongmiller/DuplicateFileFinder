@@ -44,12 +44,15 @@ namespace DuplicateFileFinder
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.radCompareContents = new System.Windows.Forms.RadioButton();
 			this.radCompareFilenames = new System.Windows.Forms.RadioButton();
+			this.btnCopyAll = new System.Windows.Forms.Button();
+			this.btnCopyUnique = new System.Windows.Forms.Button();
+			this.btnExportAll = new System.Windows.Forms.Button();
+			this.btnExportUnique = new System.Windows.Forms.Button();
 			this.btnFindFiles = new System.Windows.Forms.Button();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.dgvFoundFiles = new System.Windows.Forms.DataGridView();
 			this.imageContainer = new System.Windows.Forms.FlowLayoutPanel();
 			this.btnClearFoundFiles = new System.Windows.Forms.Button();
-			this.btnCopyUnique = new System.Windows.Forms.Button();
 			this.btnBrowse_DestDir = new System.Windows.Forms.Button();
 			this.lblDestDir = new System.Windows.Forms.Label();
 			this.tbDestDir = new System.Windows.Forms.TextBox();
@@ -59,7 +62,8 @@ namespace DuplicateFileFinder
 			this.tbUniqueFilesFound = new System.Windows.Forms.TextBox();
 			this.cbSearchSubDirs = new System.Windows.Forms.CheckBox();
 			this.splitContainer = new System.Windows.Forms.SplitContainer();
-			this.btnCopyAll = new System.Windows.Forms.Button();
+			this.btnOpenDestDir = new System.Windows.Forms.Button();
+			this.btnOpenSourceDir = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dgvFoundFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
 			this.splitContainer.Panel1.SuspendLayout();
@@ -79,11 +83,12 @@ namespace DuplicateFileFinder
 			// btnBrowse_TopmostDir
 			// 
 			this.btnBrowse_TopmostDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnBrowse_TopmostDir.Location = new System.Drawing.Point(424, 7);
+			this.btnBrowse_TopmostDir.Location = new System.Drawing.Point(354, 8);
 			this.btnBrowse_TopmostDir.Name = "btnBrowse_TopmostDir";
 			this.btnBrowse_TopmostDir.Size = new System.Drawing.Size(64, 23);
 			this.btnBrowse_TopmostDir.TabIndex = 2;
 			this.btnBrowse_TopmostDir.Text = "Browse";
+			this.toolTip1.SetToolTip(this.btnBrowse_TopmostDir, "Browser for a source directory");
 			this.btnBrowse_TopmostDir.UseVisualStyleBackColor = true;
 			this.btnBrowse_TopmostDir.Click += new System.EventHandler(this.btnBrowse_Click);
 			// 
@@ -115,7 +120,7 @@ namespace DuplicateFileFinder
 			this.tbSourceDir.Location = new System.Drawing.Point(102, 10);
 			this.tbSourceDir.Name = "tbSourceDir";
 			this.tbSourceDir.ReadOnly = true;
-			this.tbSourceDir.Size = new System.Drawing.Size(316, 20);
+			this.tbSourceDir.Size = new System.Drawing.Size(246, 20);
 			this.tbSourceDir.TabIndex = 0;
 			this.tbSourceDir.Text = ".\\..\\..\\..\\..\\source";
 			// 
@@ -154,6 +159,56 @@ namespace DuplicateFileFinder
 			this.toolTip1.SetToolTip(this.radCompareFilenames, "Fast and Dumb");
 			this.radCompareFilenames.UseVisualStyleBackColor = true;
 			// 
+			// btnCopyAll
+			// 
+			this.btnCopyAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnCopyAll.Location = new System.Drawing.Point(130, 202);
+			this.btnCopyAll.Name = "btnCopyAll";
+			this.btnCopyAll.Size = new System.Drawing.Size(71, 23);
+			this.btnCopyAll.TabIndex = 21;
+			this.btnCopyAll.Text = "Copy All";
+			this.toolTip1.SetToolTip(this.btnCopyAll, "Copy all discovered files to the destination directory entered above");
+			this.btnCopyAll.UseVisualStyleBackColor = true;
+			this.btnCopyAll.Click += new System.EventHandler(this.btnCopyAll_Click);
+			// 
+			// btnCopyUnique
+			// 
+			this.btnCopyUnique.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnCopyUnique.Location = new System.Drawing.Point(10, 202);
+			this.btnCopyUnique.Name = "btnCopyUnique";
+			this.btnCopyUnique.Size = new System.Drawing.Size(114, 23);
+			this.btnCopyUnique.TabIndex = 12;
+			this.btnCopyUnique.Text = "Copy Only Unique";
+			this.toolTip1.SetToolTip(this.btnCopyUnique, "Copy only one unique copy of each photo to the destination directory entered abov" +
+        "e");
+			this.btnCopyUnique.UseVisualStyleBackColor = true;
+			this.btnCopyUnique.Click += new System.EventHandler(this.btnCopyUnique_Click);
+			// 
+			// btnExportAll
+			// 
+			this.btnExportAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnExportAll.Location = new System.Drawing.Point(273, 202);
+			this.btnExportAll.Name = "btnExportAll";
+			this.btnExportAll.Size = new System.Drawing.Size(158, 23);
+			this.btnExportAll.TabIndex = 26;
+			this.btnExportAll.Text = "Export All Filenames to txt";
+			this.toolTip1.SetToolTip(this.btnExportAll, "Create a text document containing all discovered file paths (including duplicates" +
+        ")");
+			this.btnExportAll.UseVisualStyleBackColor = true;
+			this.btnExportAll.Click += new System.EventHandler(this.btnExportAll_Click);
+			// 
+			// btnExportUnique
+			// 
+			this.btnExportUnique.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnExportUnique.Location = new System.Drawing.Point(437, 202);
+			this.btnExportUnique.Name = "btnExportUnique";
+			this.btnExportUnique.Size = new System.Drawing.Size(192, 23);
+			this.btnExportUnique.TabIndex = 27;
+			this.btnExportUnique.Text = "Export only unique filenames to txt";
+			this.toolTip1.SetToolTip(this.btnExportUnique, "Create a text document containing containing only unique filepaths");
+			this.btnExportUnique.UseVisualStyleBackColor = true;
+			this.btnExportUnique.Click += new System.EventHandler(this.btnExportUnique_Click);
+			// 
 			// btnFindFiles
 			// 
 			this.btnFindFiles.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -162,6 +217,9 @@ namespace DuplicateFileFinder
 			this.btnFindFiles.Size = new System.Drawing.Size(88, 23);
 			this.btnFindFiles.TabIndex = 6;
 			this.btnFindFiles.Text = "Find all files";
+			this.toolTip1.SetToolTip(this.btnFindFiles, "Search the source directory entered above (and sub-directories if specified) for " +
+        "files with the given extensions, and compare the discovered files to mark duplic" +
+        "ates");
 			this.btnFindFiles.UseVisualStyleBackColor = true;
 			this.btnFindFiles.Click += new System.EventHandler(this.btnFindFiles_Click);
 			// 
@@ -191,10 +249,10 @@ namespace DuplicateFileFinder
 			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
 			this.dgvFoundFiles.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			this.dgvFoundFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvFoundFiles.Location = new System.Drawing.Point(3, 180);
+			this.dgvFoundFiles.Location = new System.Drawing.Point(3, 231);
 			this.dgvFoundFiles.Name = "dgvFoundFiles";
 			this.dgvFoundFiles.RowTemplate.Height = 25;
-			this.dgvFoundFiles.Size = new System.Drawing.Size(627, 306);
+			this.dgvFoundFiles.Size = new System.Drawing.Size(627, 255);
 			this.dgvFoundFiles.TabIndex = 8;
 			this.dgvFoundFiles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFoundFiles_CellContentClick);
 			this.dgvFoundFiles.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dgvFoundFiles_ColumnAdded);
@@ -210,33 +268,24 @@ namespace DuplicateFileFinder
 			// btnClearFoundFiles
 			// 
 			this.btnClearFoundFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnClearFoundFiles.Location = new System.Drawing.Point(558, 151);
+			this.btnClearFoundFiles.Location = new System.Drawing.Point(558, 173);
 			this.btnClearFoundFiles.Name = "btnClearFoundFiles";
 			this.btnClearFoundFiles.Size = new System.Drawing.Size(71, 23);
 			this.btnClearFoundFiles.TabIndex = 11;
 			this.btnClearFoundFiles.Text = "Clear";
+			this.toolTip1.SetToolTip(this.btnClearFoundFiles, "Clear file list and image previews");
 			this.btnClearFoundFiles.UseVisualStyleBackColor = true;
 			this.btnClearFoundFiles.Click += new System.EventHandler(this.btnClearFoundFiles_Click);
-			// 
-			// btnCopyUnique
-			// 
-			this.btnCopyUnique.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCopyUnique.Location = new System.Drawing.Point(186, 150);
-			this.btnCopyUnique.Name = "btnCopyUnique";
-			this.btnCopyUnique.Size = new System.Drawing.Size(114, 23);
-			this.btnCopyUnique.TabIndex = 12;
-			this.btnCopyUnique.Text = "Copy Only Unique";
-			this.btnCopyUnique.UseVisualStyleBackColor = true;
-			this.btnCopyUnique.Click += new System.EventHandler(this.btnCopyUnique_Click);
 			// 
 			// btnBrowse_DestDir
 			// 
 			this.btnBrowse_DestDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnBrowse_DestDir.Location = new System.Drawing.Point(565, 62);
+			this.btnBrowse_DestDir.Location = new System.Drawing.Point(495, 60);
 			this.btnBrowse_DestDir.Name = "btnBrowse_DestDir";
 			this.btnBrowse_DestDir.Size = new System.Drawing.Size(64, 23);
 			this.btnBrowse_DestDir.TabIndex = 15;
 			this.btnBrowse_DestDir.Text = "Browse";
+			this.toolTip1.SetToolTip(this.btnBrowse_DestDir, "Browse for a destination directory");
 			this.btnBrowse_DestDir.UseVisualStyleBackColor = true;
 			this.btnBrowse_DestDir.Click += new System.EventHandler(this.btnBrowse_DestDir_Click);
 			// 
@@ -256,14 +305,14 @@ namespace DuplicateFileFinder
 			this.tbDestDir.Location = new System.Drawing.Point(121, 62);
 			this.tbDestDir.Name = "tbDestDir";
 			this.tbDestDir.ReadOnly = true;
-			this.tbDestDir.Size = new System.Drawing.Size(438, 20);
+			this.tbDestDir.Size = new System.Drawing.Size(367, 20);
 			this.tbDestDir.TabIndex = 13;
 			this.tbDestDir.Text = ".\\..\\..\\..\\..\\dest";
 			// 
 			// lblTotalFilesFound
 			// 
 			this.lblTotalFilesFound.AutoSize = true;
-			this.lblTotalFilesFound.Location = new System.Drawing.Point(10, 126);
+			this.lblTotalFilesFound.Location = new System.Drawing.Point(10, 148);
 			this.lblTotalFilesFound.Name = "lblTotalFilesFound";
 			this.lblTotalFilesFound.Size = new System.Drawing.Size(88, 13);
 			this.lblTotalFilesFound.TabIndex = 17;
@@ -272,7 +321,7 @@ namespace DuplicateFileFinder
 			// tbTotalFilesFound
 			// 
 			this.tbTotalFilesFound.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.tbTotalFilesFound.Location = new System.Drawing.Point(114, 122);
+			this.tbTotalFilesFound.Location = new System.Drawing.Point(114, 144);
 			this.tbTotalFilesFound.Name = "tbTotalFilesFound";
 			this.tbTotalFilesFound.ReadOnly = true;
 			this.tbTotalFilesFound.Size = new System.Drawing.Size(66, 23);
@@ -282,7 +331,7 @@ namespace DuplicateFileFinder
 			// lblUniqueFilesFound
 			// 
 			this.lblUniqueFilesFound.AutoSize = true;
-			this.lblUniqueFilesFound.Location = new System.Drawing.Point(10, 156);
+			this.lblUniqueFilesFound.Location = new System.Drawing.Point(10, 178);
 			this.lblUniqueFilesFound.Name = "lblUniqueFilesFound";
 			this.lblUniqueFilesFound.Size = new System.Drawing.Size(98, 13);
 			this.lblUniqueFilesFound.TabIndex = 18;
@@ -291,7 +340,7 @@ namespace DuplicateFileFinder
 			// tbUniqueFilesFound
 			// 
 			this.tbUniqueFilesFound.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-			this.tbUniqueFilesFound.Location = new System.Drawing.Point(114, 151);
+			this.tbUniqueFilesFound.Location = new System.Drawing.Point(114, 173);
 			this.tbUniqueFilesFound.Name = "tbUniqueFilesFound";
 			this.tbUniqueFilesFound.ReadOnly = true;
 			this.tbUniqueFilesFound.Size = new System.Drawing.Size(66, 23);
@@ -309,6 +358,8 @@ namespace DuplicateFileFinder
 			this.cbSearchSubDirs.Size = new System.Drawing.Size(135, 17);
 			this.cbSearchSubDirs.TabIndex = 20;
 			this.cbSearchSubDirs.Text = "Search Sub-Directories";
+			this.toolTip1.SetToolTip(this.cbSearchSubDirs, "Select whether to include sub-directories within the sourec directory in the sear" +
+        "ch");
 			this.cbSearchSubDirs.UseVisualStyleBackColor = true;
 			// 
 			// splitContainer
@@ -321,6 +372,10 @@ namespace DuplicateFileFinder
 			// 
 			// splitContainer.Panel1
 			// 
+			this.splitContainer.Panel1.Controls.Add(this.btnExportUnique);
+			this.splitContainer.Panel1.Controls.Add(this.btnExportAll);
+			this.splitContainer.Panel1.Controls.Add(this.btnOpenDestDir);
+			this.splitContainer.Panel1.Controls.Add(this.btnOpenSourceDir);
 			this.splitContainer.Panel1.Controls.Add(this.radCompareContents);
 			this.splitContainer.Panel1.Controls.Add(this.radCompareFilenames);
 			this.splitContainer.Panel1.Controls.Add(this.btnCopyAll);
@@ -351,16 +406,29 @@ namespace DuplicateFileFinder
 			this.splitContainer.SplitterWidth = 3;
 			this.splitContainer.TabIndex = 21;
 			// 
-			// btnCopyAll
+			// btnOpenDestDir
 			// 
-			this.btnCopyAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCopyAll.Location = new System.Drawing.Point(306, 150);
-			this.btnCopyAll.Name = "btnCopyAll";
-			this.btnCopyAll.Size = new System.Drawing.Size(76, 23);
-			this.btnCopyAll.TabIndex = 21;
-			this.btnCopyAll.Text = "Copy All";
-			this.btnCopyAll.UseVisualStyleBackColor = true;
-			this.btnCopyAll.Click += new System.EventHandler(this.btnCopyAll_Click);
+			this.btnOpenDestDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOpenDestDir.Location = new System.Drawing.Point(565, 60);
+			this.btnOpenDestDir.Name = "btnOpenDestDir";
+			this.btnOpenDestDir.Size = new System.Drawing.Size(64, 23);
+			this.btnOpenDestDir.TabIndex = 25;
+			this.btnOpenDestDir.Text = "Open";
+			this.toolTip1.SetToolTip(this.btnOpenDestDir, "Open destination directory");
+			this.btnOpenDestDir.UseVisualStyleBackColor = true;
+			this.btnOpenDestDir.Click += new System.EventHandler(this.btnOpenDestDir_Click);
+			// 
+			// btnOpenSourceDir
+			// 
+			this.btnOpenSourceDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnOpenSourceDir.Location = new System.Drawing.Point(424, 8);
+			this.btnOpenSourceDir.Name = "btnOpenSourceDir";
+			this.btnOpenSourceDir.Size = new System.Drawing.Size(64, 23);
+			this.btnOpenSourceDir.TabIndex = 24;
+			this.btnOpenSourceDir.Text = "Open";
+			this.toolTip1.SetToolTip(this.btnOpenSourceDir, "Open source directory");
+			this.btnOpenSourceDir.UseVisualStyleBackColor = true;
+			this.btnOpenSourceDir.Click += new System.EventHandler(this.btnOpenSourceDir_Click);
 			// 
 			// Form1
 			// 
@@ -396,7 +464,6 @@ namespace DuplicateFileFinder
 		private DataGridView dgvFoundFiles;
 		private FlowLayoutPanel imageContainer;
 		private Button btnClearFoundFiles;
-		private Button btnCopyUnique;
 		private Button btnBrowse_DestDir;
 		private Label lblDestDir;
 		private TextBox tbDestDir;
@@ -409,6 +476,11 @@ namespace DuplicateFileFinder
 		private Button btnCopyAll;
 		private RadioButton radCompareContents;
 		private RadioButton radCompareFilenames;
+		private Button btnOpenDestDir;
+		private Button btnOpenSourceDir;
+		private Button btnExportUnique;
+		private Button btnExportAll;
+		private Button btnCopyUnique;
 	}
 }
 
